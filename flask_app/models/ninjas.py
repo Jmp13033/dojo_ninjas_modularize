@@ -20,4 +20,9 @@ class Ninja:
         for ninja in results:
             dojo_ninja.append(cls(ninja))
         return dojo_ninja # return the value of the users
-        
+    
+    @classmethod
+    def save(cls, data):
+        query = "INSERT INTO ninjas (first_name,last_name,age) VALUES (%(first_name)s,%(last_name)s,%(age)s);"
+        result = connectToMySQL('dojo_and_ninjas').query_db(query,data)
+        return result

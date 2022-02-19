@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template, sessions, redirect, request
 from flask_app.controllers.dojo import Dojo # lower cased 
 from flask_app.models.dojos import Dojo
+from flask_app.models.ninjas import Ninja
 
 @app.route("/ninjas")
 def add():
@@ -12,13 +13,8 @@ def add():
 
 @app.route("/creating_ninja", methods=["POST"])
 def create(): 
-    data = {
-        "id" : request.form["id"],
-        "first_name" : request.form["fname"],
-        "id" : request.form["lname"],
-
-    } 
-    return redirect("create_ninja") # changed here
+    Ninja.save(request.form)
+    return redirect("/create_ninja") # changed here here
 
 
 @app.route("/create_ninja")
